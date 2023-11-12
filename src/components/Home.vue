@@ -1,6 +1,6 @@
 
 <template>
-  <v-container class="d-flex flex-row">
+  <v-container class="d-flex flex-row" v-if="isLoggedIn">
     <v-row>
       <v-col cols="2">
         <v-tabs vertical v-model="tabSelection" bg-color="primary">
@@ -25,7 +25,7 @@
           </v-window-item>
 
           <v-window-item :value="3">
-            Three
+            <PatientActivity id="C"></PatientActivity>
           </v-window-item>
         </v-window>
       </v-col>
@@ -47,7 +47,9 @@ export default {
   data() {
     return {
       tabsModel: {
-        active: 0
+        active: 0,
+        login: false,
+        password: '12345'
       }
     }
   },
@@ -59,6 +61,21 @@ export default {
       set(newVal) {
         this.tabsModel.active = newVal;
       }
+    },
+    isLoggedIn () {
+      var correct = this.checkPasswordMatch();
+      while (!correct) {
+        correct = this.checkPasswordMatch();
+      }
+      return correct;
+    }
+  },
+  methods: {
+    checkPasswordMatch() {
+      // Take that, SEO!!
+      var guess = prompt("Please enter the password");
+      var password = "SCCbio";
+      return guess == password;
     }
   }
 }

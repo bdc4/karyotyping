@@ -1,13 +1,6 @@
 <template>
-  <div>
-
-    <div>
-      <div>
-        <!--template :src="`../assets/patient${this.id}/conclusions/template.html`"></template-->
-        
-        <PatientAConclusions></PatientAConclusions>
-      </div>
-    </div>
+  <div :class="state.step.end ? '' : 'activity-container'">
+    <!-- Feedback Popup -->
     <v-snackbar v-model="popup.show" multi-line close-on-content-click :timeout="popup.timeout || -1">
       <v-row>
         <v-col cols="3" class="d-flex d-flex-row px-10" v-if="popup.images.length">
@@ -22,54 +15,60 @@
         <v-btn class="my-5" @click="popup.show = false">Try Again</v-btn>
       </v-row>
     </v-snackbar>
+
+    <!-- Activity Header -->
     <v-card>
       <v-card-title>
-        {{ activity.title }} {{ completion[id] ? '(Complete!)' : '' }}
+        {{ activity.title }} {{ completion[id] ? '' : '' }}
       </v-card-title>
       <v-card-text v-if="!state.step.end">
         {{ activity.description }}
         Step: {{ stepIndex }}
         Key: {{ state.key }}
-        <v-row class="pt-5">
-          <v-col cols="1">
-            <v-img :src="currentStepImage" @click="expandImage = true" class="activity-image" height="100">
-              <v-dialog v-model="expandImage" activator="parent">
-                <v-card title="Dialog">
-                  <v-card-text>
-                    <v-img :src="currentStepImage" height="100" class="activity-image"></v-img>
-                  </v-card-text>
-                </v-card>
-              </v-dialog>
-            </v-img>
-          </v-col>
-          <v-col cols="11"> {{ tooltip }} </v-col>
+        Hidden Chroms: {{ hiddenChroms }}
+        <v-alert type="info" dense class="tooltip-fixed">
+          <v-row class="pt-5">
+            <v-col>
+              <v-img :src="currentStepImage" @click="expandImage = true" class="activity-image" height="100">
+                <v-dialog v-model="expandImage" activator="parent">
+                  <v-card title="Dialog">
+                    <v-card-text>
+                      <v-img :src="currentStepImage" height="100" class="activity-image"></v-img>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
+              </v-img>
+            </v-col>
+            <v-col cols="10" class="tooltip-text"> {{ tooltip }} </v-col>
 
-        </v-row>
+          </v-row>
+        </v-alert>
 
       </v-card-text>
 
       <!-- Activity Completed -->
       <v-card-text v-else>
-
-
-
-        <v-alert text color="success">{{ tooltip }}</v-alert>
-        <v-btn @click="stepIndex = 0" color="secondary">Restart</v-btn>
+        <component :is="AsyncComponent"></component>
+        <hr />
       </v-card-text>
+
+      <!-- Activity -->
       <v-row class="pa-0 ma-0">
         <v-col v-for="(chromGroup, index) in images" :key="index" @click="selectAnswer(chromGroup, index)">
           <v-card width="110" height="150">
             <v-card-text>
               <v-row class="activity-card">
                 <template v-for="chrom in chromGroup">
-                  <v-img v-if="stepIndex == -1 || (!hiddenChroms.includes(chrom) && !chrom.includes('c'))" :key="chrom"
-                    :cols="12 / chromGroup.length" :src="getImagePath(chrom)" height="100" max-width="60"
+                  <v-img
+                    v-if="stepIndex == -1 || ((!chrom.match(/\D/g) || !hiddenChroms.includes(chrom)) && !chrom.includes('c'))"
+                    :key="chrom" :cols="12 / chromGroup.length" :src="getImagePath(chrom)" height="100" max-width="60"
                     class="activity-image"></v-img>
                 </template>
               </v-row>
               <v-row class="text-center">
                 <v-col height="20">
-                  <v-chip :color="(response[index + 1] || index + 1 == state.key) ? 'blue' : ''">
+                  <v-chip
+                    :color="(response[index + 1] || index + 1 == (state.key && state.key.replace(/\D/g, ''))) ? 'blue' : ''">
                     {{ (index == 22) ? 'XX/XY' : (index + 1) }}</v-chip>
                 </v-col>
               </v-row>
@@ -77,21 +76,19 @@
           </v-card>
         </v-col>
       </v-row>
-      <!--v-card-actions>
-      <v-btn v-for="(action, index) in activity.actions" :key="index">{{ action.text }}</v-btn>
-    </v-card-actions-->
     </v-card>
+    <v-alert v-if="state.step.end" class="mt-5" text color="success">{{ tooltip }}
+      <v-btn class="float-end" @click="stepIndex = 0" color="secondary">
+        Restart
+      </v-btn>
+    </v-alert>
   </div>
 </template>
 
 <script>
 import PatientData from '../assets/patients.json'
-import PatientAConclusions from './PatientAConclusions.vue'
 export default {
   name: "PatientActivity",
-  components: {
-    PatientAConclusions
-  },
   data() {
     return {
       activityData: PatientData,
@@ -109,7 +106,13 @@ export default {
   props: {
     id: String
   },
+  async mounted() {
+    this.getConclusionComponent();
+  },
   computed: {
+    AsyncComponent() {
+      return this.conclusionComponent
+    },
     activity() {
       return this.activityData[this.id]
     },
@@ -119,9 +122,11 @@ export default {
       },
       set(newVal) {
         if (newVal < this.state.keys.length) {
-          this.defaultStepIndex = newVal
+          this.defaultStepIndex = newVal;
+          //window.scrollTo(0, 0);
         } else {
-          alert(`Nice work! You've completed the activity for Patient ${this.id}!`)
+          window.scrollTo(0, 0);
+          //alert(`Nice work! You've completed the activity for Patient ${this.id}!`)
           this.stepIndex = "-1";
           this.completion[this.id] = true;
         }
@@ -185,8 +190,6 @@ export default {
         imageList.push(chrom);
       }
 
-
-      // console.log(imageList)
       return imageList;
     },
     spacers() {
@@ -203,7 +206,7 @@ export default {
   },
   methods: {
     async getConclusionComponent() {
-      var component = await import(`./Patient${this.id}Conclusions.vue`)
+      var component = await import(`../assets/patient${this.id}/conclusions/template.vue`)
       console.log(component.default)
       this.conclusionComponent = component.default;
     },
@@ -253,4 +256,28 @@ export default {
 .activity-card {
   border-bottom: 1px solid black;
 }
+
+.tooltip-fixed {
+  position: fixed;
+  bottom: 0px;
+  left: 20px;
+  z-index: 1;
+  max-width: 90vw;
+  .tooltip-text {
+    // display: none;
+  }
+}
+
+.activity-container{
+  margin-bottom: 200px;
+}
+/*
+.tooltip-fixed:hover {
+  height: 135px;
+  width: unset;
+  max-width: 70vw;
+  .tooltip-text {
+    display: block;
+  }
+} */
 </style>

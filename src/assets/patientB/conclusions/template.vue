@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h2>Patient A's Karyotype</h2>
+    <h2>Patient B's Karyotype</h2>
     <p>
-      Congratulations! You successfully completed Patient A's Karyotype. Next, interpret the karyotype and make a
-      diagnosis. Patient A's completed karyotype is at the bottom of the page for reference.
+      Congratulations! You successfully completed Patient B's Karyotype. Next, interpret the karyotype and make a diagnosis. Patient B's completed karyotype is at the bottom of the page for reference.
     </p>
     <p>
       On a separate piece of paper, answer the following 2 questions.
@@ -17,7 +16,7 @@
         XXY</strong> is a patient with an extra sex chromosome.
     </p>
     <p>
-      <strong>A 1.</strong> What notation would you use to characterize Patient A's karyotype?
+      <strong>B 1.</strong> What notation would you use to characterize Patient B's karyotype?
     </p>
     <h3>Making a diagnosis</h3>
     <p>
@@ -27,9 +26,9 @@
       chromosome is affected. Listed below are some syndromes caused by an abnormal number of chromosomes.
     </p>
     <p>
-      <strong>A 2.</strong> What diagnosis would you give patient A?
+      <strong>B 2.</strong> What diagnosis would you give patient B?
     </p>
-    <v-table>
+    <v-simple-table>
       <thead>
         <tr>
           <th><strong>Diagnosis</strong></th>
@@ -55,13 +54,13 @@
           </td>
         </tr>
       </tbody>
-    </v-table>
+    </v-simple-table>
   </div>
 </template>
 
 <script>
 export default {
-  name: "PatientAConclusions",
+  name: "PatientBConclusions",
   data () {
     return {
       foo: 'bar'
