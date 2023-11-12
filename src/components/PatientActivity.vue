@@ -1,5 +1,13 @@
 <template>
   <div>
+
+    <div>
+      <div>
+        <!--template :src="`../assets/patient${this.id}/conclusions/template.html`"></template-->
+        
+        <PatientAConclusions></PatientAConclusions>
+      </div>
+    </div>
     <v-snackbar v-model="popup.show" multi-line close-on-content-click :timeout="popup.timeout || -1">
       <v-row>
         <v-col cols="3" class="d-flex d-flex-row px-10" v-if="popup.images.length">
@@ -39,7 +47,12 @@
         </v-row>
 
       </v-card-text>
+
+      <!-- Activity Completed -->
       <v-card-text v-else>
+
+
+
         <v-alert text color="success">{{ tooltip }}</v-alert>
         <v-btn @click="stepIndex = 0" color="secondary">Restart</v-btn>
       </v-card-text>
@@ -73,8 +86,12 @@
 
 <script>
 import PatientData from '../assets/patients.json'
+import PatientAConclusions from './PatientAConclusions.vue'
 export default {
   name: "PatientActivity",
+  components: {
+    PatientAConclusions
+  },
   data() {
     return {
       activityData: PatientData,
@@ -85,7 +102,8 @@ export default {
         show: false
       },
       completion: {},
-      expandImage: false
+      expandImage: false,
+      conclusionComponent: null
     }
   },
   props: {
@@ -150,7 +168,7 @@ export default {
             chrom.push(l)
           } catch (e) {
             // stuff
-            console.log(`no matching ${letter} found for ${i}`)
+            // console.log(`no matching ${letter} found for ${i}`)
           }
         })
 
@@ -166,9 +184,9 @@ export default {
         //}
         imageList.push(chrom);
       }
-      
 
-      console.log(imageList)
+
+      // console.log(imageList)
       return imageList;
     },
     spacers() {
@@ -184,8 +202,13 @@ export default {
     }
   },
   methods: {
+    async getConclusionComponent() {
+      var component = await import(`./Patient${this.id}Conclusions.vue`)
+      console.log(component.default)
+      this.conclusionComponent = component.default;
+    },
     getImagePath(img) {
-      return require(`../assets/patient${this.id}Images/${img}.gif`)
+      return require(`../assets/patient${this.id}/images/${img}.gif`)
     },
     selectAnswer(chromGroup, index) {
       if (chromGroup.includes(this.currentChrom)) {
