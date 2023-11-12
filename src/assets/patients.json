@@ -1,0 +1,151 @@
+{
+  "A": {
+    "title": "Patient A",
+    "description": "Patient A is the nearly-full-term fetus of a forty year old female. Chromosomes were obtained from fetal epithelial cells acquired through amniocentesis.",
+    "data": {
+      "addC": [
+        21
+      ],
+      "keys": [
+        "2",
+        "16",
+        "12",
+        "5",
+        "21"
+      ],
+      "responses": {
+        "2": {
+          "5": "Chromosome 5 is not the unknown's homologous pair because the unknown chromosome is longer. Notice that the banding patterns and placement of centromeres are also different.",
+          "12": "Chromosome 12 is not the unknown's homologous pair because the unknown chromosome is longer. Notice that the banding patterns and placement of centromeres are also different.",
+          "16": "Chromosome 16 is not the unknown's homologous pair because the unknown chromosome is much longer. Notice that the banding patterns and placement of centromeres are also different."
+        },
+        "16": {
+          "5": "Chromosome 5 is not the unknown's homologous pair because the unknown chromosome is much shorter. Notice that the banding patterns and placement of centromeres are also different.",
+          "12": "Chromosome 12 is not the unknown's homologous pair because the unknown chromosome is shorter. Notice that the banding patterns and placement of centromeres are also different."
+        },
+        "12": {
+          "5": "Chromosome 5 is not the unknown's homologous pair because the unknown chromosome is shorter. Notice that the banding patterns and placement of centromeres are also different."
+        },
+        "5": {},
+        "21": {
+          "13": "The unknown is much shorter in length than chromosomes 13, and the banding patterns and centromeres do not match.",
+          "18": "The unknown is much shorter in length than chromosomes 18, and the banding patterns and centromeres do not match.",
+          "23": "The unknown is not an extra sex chromosome. Although its size is similar to that of a Y chromosome, Y chromosomes typically do not have distinguishable bands."
+        }
+      },
+      "steps": {
+        "0": {
+          "target": "b",
+          "tooltip": "Place this chromosome in the partially completed karyotype below by clicking on its homologous chromosome. If you match the chromosome correctly, you will proceed to the next chromosome. If you match incorrectly, a page will explain why the chromosome you chose is not the unknown's pair and you can choose again."
+        },
+        "1": {
+          "target": "a",
+          "tooltip": "Now click on the chromosome in the karyotype that is homologous to this chromosome."
+        },
+        "2": {
+          "target": "b",
+          "tooltip": "Click where this chromosome belongs on the karyotype."
+        },
+        "3": {
+          "target": "a",
+          "tooltip": "Now match this one up with its homologous chromosome."
+        },
+        "4": {
+          "target": "c",
+          "tooltip": "Now that you've paired up all of the chromosomes, where does this extra chromosome belong on the karyotype?"
+        },
+        "-1": {
+          "target": "",
+          "tooltip": "Congrats on completing the exercise!",
+          "end": true
+        }
+      }
+    }
+  },
+  "B": {
+    "title": "Patient B",
+    "description": "Patient B is a 28 year old male who is trying to identify a cause for his infertility. Chromosomes were obtained from nucleated cells in the patient's blood.",
+    "data": {
+      "keys": [
+        "21",
+        "11",
+        "14",
+        "23",
+        "3",
+        "20",
+        "10"
+      ],
+      "responses": {
+        "21": {
+          "10": "Chromosome 10 is quite a bit longer than the unknown and has more bands as well.",
+          "20": "Chromosome 20 is slightly longer than the unknown and has several more bands and a distinct centromere in its middle.",
+          "3": "The unknown is not homologous to chromosome 3. Chromosome 3 is considerably larger than the unknown.",
+          "23": "The unknown is not a sex chromosome. Although it is short, like a Y chromosome, Y chromosomes do not have distinct bands; The unknown appears to have a single distinct dark band.",
+          "14": "Chromosome 14 is not the unknown's homologous pair because the unknown chromosome is much shorter. Chromsome 14 also has many more bands than the unknown.",
+          "11": "Chromosome 11 is not the unknown's homologous pair because the unknown chromosome is much shorter. Chromsome 11 also has many more bands than the unknown."
+        },
+        "11": {
+          "10": "Chromosome 10 is deceivingly similar to the unknown, but they do have different banding patterns and thus are not a homologous pair.",
+          "20": "Chromosome 20 is considerably shorter than the unknown, and thus cannot be its homologous partner.",
+          "3": "Chromosome 3 is longer than the unknown and it has more bands.",
+          "23": "Although the unknown is similar in size to the X chromosome and their centromeres are also placed in similar positions, their banding patterns are clearly different.",
+          "14": "The unknown is longer than chromosome 14 and they have different banding patterns."
+        },
+        "14": {
+          "10": "Chromosome 10 is longer than the unknown and has a definite different banding pattern.",
+          "20": "Chromosome 20 is slightly shorter than the unknown and has a distinct centromere in its middle that is not apparent in the unknown.",
+          "3": "Chromosome 3 is considerably longer than the unknown and thus cannot be its homologous partner.",
+          "23": "The unknown chromosome is too short to be an X chromsome, and too long to be a Y chromosome. Thus, it is not a sex chromosome."
+        },
+        "23": {
+          "10": "Chromosome 10 is slightly longer than the unknown. Its centromere is also further off-center and the banding pattern is different.",
+          "20": "Chromosome 20 is shorter than the unknown with a simpler banding pattern.",
+          "3": "Chromosome 3 is considerably longer than the unknown with a different banding pattern."
+        },
+        "3": {
+          "10": "Chromosome 10 is shorter than the unknown and its banding pattern is very different.",
+          "20": "Chromosome 20 is much shorter than the unknown with a simpler banding pattern."
+        },
+        "20": {
+          "10": "Chromosome 10 is taller than the unknown and has a more complex banding pattern."
+        },
+        "10": {}
+      },
+      "steps": {
+        "0": {
+          "target": "b",
+          "tooltip": "Place this chromosome in the partially completed karyotype below by clicking on its homologous chromosome. If you match the chromosome correctly, you will proceed to the next chromosome. If you match incorrectly, a page will explain why the chromosome you chose is not the unknown's pair and you can choose again."
+        },
+        "1": {
+          "target": "a",
+          "tooltip": "Now place this chromosome with its partner."
+        },
+        "2": {
+          "target": "a",
+          "tooltip": "Find a home for this one now."
+        },
+        "3": {
+          "target": "a",
+          "tooltip": "Now match this one up with its homologous chromosome."
+        },
+        "4": {
+          "target": "b",
+          "tooltip": "Now match this one up with its homologous chromosome."
+        },
+        "5": {
+          "target": "a",
+          "tooltip": "Now match this one up with its homologous chromosome."
+        },
+        "6": {
+          "target": "b",
+          "tooltip": "Now match this one up with its homologous chromosome."
+        },
+        "-1": {
+          "target": "",
+          "tooltip": "Congrats on completing the exercise!",
+          "end": true
+        }
+      }
+    }
+  }
+}
