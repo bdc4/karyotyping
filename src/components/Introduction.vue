@@ -63,9 +63,7 @@
             that allow us to look for several thousand possible genetic diseases in humans.</p>
 
           <p>You will evaluate 3 patients' case histories, complete their karyotypes, and diagnose any missing or extra
-            chromosomes. Then you'll conduct research on the internet to find web sites that cover some aspect of human
-            genetics. If this is an assignment for a class, you should turn in a total of 7 answers on paper (2 for each
-            patient, 1 for the internet search).</p>
+            chromosomes. (Keep track of your answers, as you'll be expected to submit them.)</p>
         </v-col>
       </v-row>
     </v-card-text>
