@@ -23,9 +23,6 @@
       </v-card-title>
       <v-card-text v-if="!state.step.end">
         {{ activity.description }}
-        Step: {{ stepIndex }}
-        Key: {{ state.key }}
-        Hidden Chroms: {{ hiddenChroms }}
         <v-alert type="info" dense class="tooltip-fixed">
           <v-row class="pt-5">
             <v-col>
