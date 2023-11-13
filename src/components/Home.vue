@@ -63,10 +63,12 @@ export default {
       }
     },
     isLoggedIn () {
+      if (localStorage.loggedIn) return true;
       var correct = this.checkPasswordMatch();
       while (!correct) {
         correct = this.checkPasswordMatch();
       }
+      localStorage.loggedIn = correct;
       return correct;
     }
   },
